@@ -43,31 +43,14 @@
         "z": "3747bf199254fa3b",
         "name": "data.csv",
         "model": "source: data is table('duckdb:data.csv')",
-        "query": "query: data -> {\n    project: *\n}",
+        "query": "query: data -> {\n    project: column0\n}",
         "x": 420,
         "y": 200,
         "wires": [
             [
-                "99f2f5a6b532f6c6"
+                "73a76f73c9a3fec2"
             ]
         ]
-    },
-    {
-        "id": "99f2f5a6b532f6c6",
-        "type": "debug",
-        "z": "3747bf199254fa3b",
-        "name": "debug",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 200,
-        "wires": []
     },
     {
         "id": "1b47e10a91b19979",
@@ -80,8 +63,110 @@
         "y": 300,
         "wires": [
             [
-                "99f2f5a6b532f6c6"
+                "f46585ccae08e71b"
             ]
+        ]
+    },
+    {
+        "id": "73a76f73c9a3fec2",
+        "type": "file",
+        "z": "3747bf199254fa3b",
+        "name": "",
+        "filename": "output-subset.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "92c4e954ff92ad5a"
+            ]
+        ]
+    },
+    {
+        "id": "f46585ccae08e71b",
+        "type": "file",
+        "z": "3747bf199254fa3b",
+        "name": "",
+        "filename": "output-http.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 660,
+        "y": 300,
+        "wires": [
+            [
+                "853fb5b8f17bc624"
+            ]
+        ]
+    },
+    {
+        "id": "92c4e954ff92ad5a",
+        "type": "exec",
+        "z": "3747bf199254fa3b",
+        "command": "head output-subset.json",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 950,
+        "y": 200,
+        "wires": [
+            [
+                "cfc91cffd53464ac"
+            ],
+            [
+                "cfc91cffd53464ac"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "cfc91cffd53464ac",
+        "type": "debug",
+        "z": "3747bf199254fa3b",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "853fb5b8f17bc624",
+        "type": "exec",
+        "z": "3747bf199254fa3b",
+        "command": "head output-http.json",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 940,
+        "y": 300,
+        "wires": [
+            [
+                "cfc91cffd53464ac"
+            ],
+            [
+                "cfc91cffd53464ac"
+            ],
+            []
         ]
     }
 ]
