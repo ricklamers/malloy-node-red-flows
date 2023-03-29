@@ -1,0 +1,68 @@
+<script type="text/javascript">
+    RED.nodes.registerType('malloy', {
+        category: 'function',
+        color: '#11b5cb',
+        defaults: {
+            name: { value: "" },
+            model: { value: "" },
+            query: { value: "" },
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "malloy.png",
+        label: function () {
+            return this.name || "Malloy";
+        },
+        oneditprepare: function () {
+            this.modelEditor = RED.editor.createEditor({
+                id: 'node-input-model-editor',
+                mode: 'ace/mode/text',
+                value: this.model
+            });
+
+            this.queryEditor = RED.editor.createEditor({
+                id: 'node-input-query-editor',
+                mode: 'ace/mode/text',
+                value: this.query
+            });
+        },
+        oneditsave: function () {
+            this.model = this.modelEditor.getValue();
+            this.modelEditor.destroy();
+            delete this.modelEditor;
+
+            this.query = this.queryEditor.getValue();
+            this.queryEditor.destroy();
+            delete this.queryEditor;
+        },
+        oneditcancel: function () {
+            this.modelEditor.destroy();
+            delete this.modelEditor;
+
+            this.queryEditor.destroy();
+            delete this.queryEditor;
+        },
+    });
+
+</script>
+
+<script type="text/html" data-template-name="malloy">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-model"><i class="fa fa-tag"></i> Model</label>
+        <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-model-editor"></div>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-model"><i class="fa fa-tag"></i> Query</label>
+        <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-query-editor"></div>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="malloy">
+    <p>A node that runs Malloy queries</p>
+</script>

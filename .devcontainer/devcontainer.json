@@ -1,5 +1,5 @@
 {
-    "postAttachCommand": "npm i && npx node-red",
+    "postAttachCommand": "npm i && cd ~/.node-red && npm i /workspaces/malloy-node-red-flows/node-red-contrib-malloy && cd /workspaces/malloy-node-red-flows && npx node-red",
     "forwardPorts": [
         1880
     ]
