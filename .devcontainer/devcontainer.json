@@ -1,0 +1,6 @@
+{
+    "postAttachCommand": "npm i && npx node-red",
+    "forwardPorts": [
+        1880
+    ]
+}

@@ -1,0 +1,141 @@
+[
+    {
+        "id": "888a0973a6ee920f",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "78b49127c1543038",
+        "type": "function",
+        "z": "888a0973a6ee920f",
+        "name": "Malloy: data.csv",
+        "func": "try {\n\n    const connection = new duckdb.DuckDBConnection();\n    const runtime = new malloy.SingleConnectionRuntime(connection);\n    const model = runtime.loadModel(\"source: data is table('duckdb:data.csv')\")\n    const runner = model.loadQuery(\"query: data->{project: *}\")\n\n    msg.payload = (await runner.run()).data.value;\n}\ncatch (e) {\n    console.error(e);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "malloy",
+                "module": "@malloydata/malloy"
+            },
+            {
+                "var": "duckdb",
+                "module": "@malloydata/db-duckdb"
+            }
+        ],
+        "x": 540,
+        "y": 300,
+        "wires": [
+            [
+                "bcac54a08c02a131"
+            ]
+        ]
+    },
+    {
+        "id": "ebf504363cd4d01c",
+        "type": "inject",
+        "z": "888a0973a6ee920f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 300,
+        "wires": [
+            [
+                "78b49127c1543038"
+            ]
+        ]
+    },
+    {
+        "id": "a06091abe821b4e2",
+        "type": "function",
+        "z": "888a0973a6ee920f",
+        "name": "Malloy: HTTPS .csv",
+        "func": "try {\n\n    const connection = new duckdb.DuckDBConnection();\n    const runtime = new malloy.SingleConnectionRuntime(connection);\n    const model = runtime.loadModel(\"source: data is table('duckdb:https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv')\")\n    const runner = model.loadQuery(\"query: data->{project: *}\")\n\n    msg.payload = (await runner.run()).data.value;\n}\ncatch (e) {\n    console.error(e);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "malloy",
+                "module": "@malloydata/malloy"
+            },
+            {
+                "var": "duckdb",
+                "module": "@malloydata/db-duckdb"
+            }
+        ],
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "bcac54a08c02a131"
+            ]
+        ]
+    },
+    {
+        "id": "281e0b6258090c4f",
+        "type": "inject",
+        "z": "888a0973a6ee920f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 420,
+        "wires": [
+            [
+                "a06091abe821b4e2"
+            ]
+        ]
+    },
+    {
+        "id": "bcac54a08c02a131",
+        "type": "debug",
+        "z": "888a0973a6ee920f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 360,
+        "wires": []
+    }
+]
