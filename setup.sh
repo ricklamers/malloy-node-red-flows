@@ -11,4 +11,4 @@ killall node-red -HUP
 
 cd ~/.node-red
 
-npm i node-red-contrib-malloy
+npm i @rickpg/node-red-contrib-malloy
