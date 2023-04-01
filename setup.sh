@@ -9,4 +9,6 @@ done
 
 killall node-red -HUP
 
-npm i /workspaces/malloy-node-red-flows/node-red-contrib-malloy
+cd ~/.node-red
+
+npm i node-red-contrib-malloy
